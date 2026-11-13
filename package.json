@@ -10,7 +10,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@mcpexpress/core": "^0.1.1",
+    "@mcpexpress/core": "file:vendor/mcpexpress-core-0.1.1.tgz",
     "axios": "^1.20.0",
     "zod": "^4.6.7"
   },
