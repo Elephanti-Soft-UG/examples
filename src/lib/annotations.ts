@@ -4,7 +4,13 @@
 import type { ToolAnnotations } from "@mcpexpress/core";
 
 /** Reads from an external service: safe to call, but it does reach the internet. */
-export const READ_ONLY_OPEN: ToolAnnotations = { readOnlyHint: true, openWorldHint: true };
+export const READ_ONLY_OPEN: ToolAnnotations = {
+    readOnlyHint: true,
+    openWorldHint: true,
+};
 
 /** Reads from your own infrastructure only (e.g. your database), not the open internet. */
-export const READ_ONLY_LOCAL: ToolAnnotations = { readOnlyHint: true, openWorldHint: false };
+export const READ_ONLY_LOCAL: ToolAnnotations = {
+    readOnlyHint: true,
+    openWorldHint: false,
+};

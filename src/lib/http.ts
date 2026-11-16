@@ -3,4 +3,5 @@
 import axios from "axios";
 
 /** axios instance with a base URL and a request timeout (10s unless overridden). */
-export const createClient = (baseURL?: string, timeout = 10_000) => axios.create({ baseURL, timeout });
+export const createClient = (baseURL?: string, timeout = 10_000) =>
+    axios.create({ baseURL, timeout });

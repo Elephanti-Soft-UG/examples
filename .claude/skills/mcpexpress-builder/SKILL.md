@@ -41,7 +41,10 @@ export const getWeather = defineTool({
     "Get the current weather for a city. Use for today's conditions, not forecasts. " +
     "Returns temperature in °C and a short summary.",
   input: z.object({
-    city: z.string().min(1).describe("City name, optionally with country, e.g. 'Paris, FR'"),
+    city: z
+      .string()
+      .min(1)
+      .describe("City name, optionally with country, e.g. 'Paris, FR'"),
   }),
   output: z.object({ temperatureC: z.number(), summary: z.string() }),
   annotations: { readOnlyHint: true, openWorldHint: true },
@@ -52,10 +55,14 @@ export const getWeather = defineTool({
     url.searchParams.set("units", "metric");
     url.searchParams.set("appid", process.env.OPENWEATHER_API_KEY!);
     const res = await fetch(url, { signal });
-    if (res.status === 404) throw new Error(`No city named "${city}". Try adding the country.`);
+    if (res.status === 404)
+      throw new Error(`No city named "${city}". Try adding the country.`);
     if (!res.ok) throw new Error(`Weather service error: HTTP ${res.status}`);
     const data = await res.json();
-    return { temperatureC: data.main.temp, summary: data.weather[0].description };
+    return {
+      temperatureC: data.main.temp,
+      summary: data.weather[0].description,
+    };
   },
 });
 ```
@@ -100,7 +107,11 @@ call and not at import time:
 import pg from "pg";
 
 let pool: pg.Pool | undefined;
-export const db = () => (pool ??= new pg.Pool({ connectionString: process.env.DATABASE_URL!, max: 5 }));
+export const db = () =>
+  (pool ??= new pg.Pool({
+    connectionString: process.env.DATABASE_URL!,
+    max: 5,
+  }));
 ```
 
 Tools using it list `"DATABASE_URL"` in `env`. Always pass SQL values as parameters
