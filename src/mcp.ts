@@ -6,4 +6,4 @@ export { currencyBriefing } from "./prompts/currency-briefing.js";
 export { explainConcept } from "./prompts/explain-concept.js";
 
 export { convertCurrency } from "./skills/convert-currency.js";
-export { tripExpenseReport } from "./skills/trip-expense-report.js";
+export { tripExpenseReport } from "./skills/trip-expense-report/skill.js";

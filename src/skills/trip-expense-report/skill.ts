@@ -1,9 +1,11 @@
-// Example Skill: a skill with supporting files, a grouping path and optional metadata.
+// Example Skill: a skill folder with supporting files, a grouping path and optional metadata.
 // It combines both tools in this project: add_numbers to total the expenses and
 // get_exchange_rates to bring every expense into one home currency.
 //
+// This is a skill folder: every other file in src/skills/trip-expense-report/ is served with
+// the skill, at its path inside the folder (references/expense-policy.md, templates/report.md).
 // Supporting files are only read by the agent when the instructions point to them, so keep
-// SKILL.md short and move long reference material or templates into `files`.
+// SKILL.md short and move long reference material or templates into the folder.
 import { defineSkill } from "@mcpexpress/core";
 
 // --- 1. Instructions --------------------------------------------------------------------------
@@ -27,33 +29,7 @@ the traveller's home currency.
 5. Fill in \`templates/report.md\` and return it to the user.
 `;
 
-// --- 2. Supporting files ----------------------------------------------------------------------
-// Keyed by path relative to the skill root. The MIME type comes from the extension
-// (.md -> text/markdown); pass { text, mimeType } to set it yourself.
-const files = {
-    "references/expense-policy.md": `# Expense policy
-
-- Meals: up to 60 per day in the home currency, per person.
-- Hotels: up to 180 per night in the home currency.
-- Taxis are fine; flights must be economy class.
-- Alcohol, minibar and personal entertainment are not reimbursed.
-- Every expense over 25 needs a receipt.
-`,
-    "templates/report.md": `# Expense report: {{trip name}}
-
-Traveller: {{name}}  ·  Home currency: {{home currency}}  ·  Rates from: {{rate date}}
-
-| Date | Description | Amount | Currency | Rate | Amount ({{home currency}}) | Flag |
-| ---- | ----------- | -----: | -------- | ---: | -------------------------: | ---- |
-| ...  | ...         |    ... | ...      |  ... |                        ... | ...  |
-
-**Total:** {{total}} {{home currency}}
-
-**Flagged items:** {{list each flagged expense and the policy rule it breaks, or "None"}}
-`,
-};
-
-// --- 3. Define the skill ----------------------------------------------------------------------
+// --- 2. Define the skill ----------------------------------------------------------------------
 // `path` groups related skills under a common prefix in the URI.
 // Served at skill://finance/trip-expense-report/SKILL.md, plus
 //   skill://finance/trip-expense-report/references/expense-policy.md
@@ -66,7 +42,6 @@ export const tripExpenseReport = defineSkill({
         "totalled in a single home currency and checked against the expense policy. Use when " +
         "the user wants to total, convert or claim trip, travel or business expenses.",
     instructions,
-    files,
     license: "MIT",
     compatibility: "Needs the get_exchange_rates and add_numbers tools from this server",
     metadata: { author: "mcp-express-examples", version: "1.0" },

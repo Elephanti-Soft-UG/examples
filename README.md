@@ -20,4 +20,4 @@ To deploy the code into your self hosted MCP Express instance. Please follow the
 ### Skills
 
 - **Convert Currency** (`skill://convert-currency/SKILL.md`): Minimal skill that teaches the agent to convert amounts with the `get_exchange_rates` tool.
-- **Trip Expense Report** (`skill://finance/trip-expense-report/SKILL.md`): Skill with supporting files (an expense policy and a report template), a `path` prefix and metadata. Combines `get_exchange_rates` and `add_numbers`.
+- **Trip Expense Report** (`skill://finance/trip-expense-report/SKILL.md`): Skill folder (`src/skills/trip-expense-report/`): its supporting files (an expense policy and a report template) are real files next to `skill.ts`. Also shows a `path` prefix and metadata. Combines `get_exchange_rates` and `add_numbers`.
